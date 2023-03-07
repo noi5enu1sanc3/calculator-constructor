@@ -1,5 +1,6 @@
 import { Layout } from 'antd';
 
+import CalculatorBlocksContainer from '../../components/CalculatorBlocksContainer/CalculatorBlocksContainer';
 import ModeSwitcher from '../../components/ModeSwitcher/ModeSwitcher';
 
 const { Header, Sider, Content } = Layout;
@@ -10,8 +11,12 @@ function MainLayout() {
       <Header>
         <ModeSwitcher />
       </Header>
-      <Sider></Sider>
-      <Content></Content>
+      <Layout>
+        <Sider>
+          <CalculatorBlocksContainer />
+        </Sider>
+        <Content></Content>
+      </Layout>
     </Layout>
   );
 }
