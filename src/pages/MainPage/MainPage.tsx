@@ -1,6 +1,6 @@
 import MainLayout from '../../layout/MainLayout/MainLayout';
 
-function Main() {
+function MainPage() {
   return (
     <div>
       <MainLayout />
@@ -8,4 +8,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default MainPage;

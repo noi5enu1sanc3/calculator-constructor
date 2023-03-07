@@ -1,4 +1,5 @@
 import { Layout } from 'antd';
+
 import ModeSwitcher from '../../components/ModeSwitcher/ModeSwitcher';
 
 const { Header, Sider, Content } = Layout;
