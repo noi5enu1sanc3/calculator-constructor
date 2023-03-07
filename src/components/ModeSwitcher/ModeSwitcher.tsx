@@ -15,6 +15,7 @@ function ModeSwitcher() {
     { label: 'Runtime', value: 'Runtime', icon: <EyeOutlined /> },
     { label: 'Constructor', value: 'Constructor', icon: <CodeIcon /> },
   ];
+
   return (
     <div className={styles.container}>
       <Segmented options={modeOptions} value={mode} onChange={setMode} size="large" />
