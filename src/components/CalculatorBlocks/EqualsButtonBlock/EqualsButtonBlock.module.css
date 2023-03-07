@@ -1,0 +1,7 @@
+@import '../../../assets/styles/variables.css';
+
+.container {
+  box-shadow: var(--shadow);
+  padding: var(--sp-xs);
+  border-radius: var(--border-radius-small);
+}

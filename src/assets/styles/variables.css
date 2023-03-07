@@ -1,0 +1,28 @@
+:root {
+  /* border */
+  --border-radius-small: 4px;
+  --border-radius-large: 6px;
+
+  /* colors */
+  --fill-light-grey: #F3F4F6;
+  --fill-light-blue: #DBEAFE;
+  --blue-primary: #5D5FEF;
+  --border-darker-grey: #C4C4C4;
+  --border-lighter-grey: #E2E3E5;
+  --text-black: #111827;
+  --text-grey: #6B7280;
+
+  /* spacings */
+  --base: 4px;
+  --sp-xs: var(--base);
+  --sp-s: calc(var(--base) * 2);
+  --sp-md: calc(var(--base) * 3);
+  --sp-lg: calc(var(--base) * 4);
+  --sp-xl: calc(var(--base) * 6);
+  --sp-xxl: calc(var(--base) * 8);
+  --sp-xxxl: calc(var(--base) * 10);
+  --sp-xxxxxl: calc(var(--base) * 14);
+
+  /* box-shadow */
+  --shadow: 0px 2px 4px rgba(0, 0, 0, 0.06), 0px 4px 6px rgba(0, 0, 0, 0.1);
+}

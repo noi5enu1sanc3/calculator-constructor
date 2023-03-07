@@ -1,0 +1,17 @@
+@import '../../../assets/styles/variables.css';
+
+.container {
+  border-radius: var(--border-radius-small);
+  padding: var(--sp-xs);
+  box-shadow: var(--shadow);
+}
+
+.list {
+  display: flex;
+  width: 100%;
+  gap: var(--sp-s);
+}
+
+.item {
+  flex-grow: 1;
+}

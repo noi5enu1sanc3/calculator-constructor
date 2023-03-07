@@ -1,0 +1,18 @@
+@import '../../../assets/styles/variables.css';
+
+.container {
+  border-radius: var(--border-radius-small);
+  padding: var(--sp-xs);
+  box-shadow: var(--shadow);
+}
+
+.content {
+  border-radius: var(--border-radius-large);
+  background-color: var(--fill-light-grey);
+  padding: var(--sp-xs) var(--sp-s);
+  text-align: end;
+}
+
+.text {
+  font-size: 36px;
+}

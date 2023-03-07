@@ -1,9 +1,14 @@
-import MainLayout from '../../layout/MainLayout/MainLayout';
+import Header from '../../layout/Header/Header';
+import Main from '../../layout/Main/Main';
+import Sidebar from '../../components/Sidebar/Sidebar';
+
+import styles from './MainPage.module.css';
 
 function MainPage() {
   return (
-    <div>
-      <MainLayout />
+    <div className={styles.page}>
+      <Header />
+      <Main />
     </div>
   );
 }

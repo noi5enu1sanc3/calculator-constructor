@@ -1,11 +1,15 @@
-import { Button } from 'antd';
+import styles from './Button.module.css';
 
 type ButtonProps = {
   value: string;
 };
 
 function DefaultButton({ value }: ButtonProps) {
-  return <Button type="default">{value}</Button>;
+  return (
+    <button className={styles.defaultButton}>
+      {value}
+    </button>
+  );
 }
 
 export default DefaultButton;

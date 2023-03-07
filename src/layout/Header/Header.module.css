@@ -1,0 +1,14 @@
+@import '../../assets/styles/variables.css';
+
+.header {
+  grid-column: 1 / span 2;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 240px);
+  column-gap: var(--sp-xxxxxl);
+  justify-content: center;
+  margin: 0 auto;
+  padding: var(--sp-xxxl) var(--sp-xxl);
+}

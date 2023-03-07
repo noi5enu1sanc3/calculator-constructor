@@ -1,8 +1,10 @@
 import Icon, { EyeOutlined } from '@ant-design/icons';
-import { Segmented, Space } from 'antd';
+import { Segmented } from 'antd';
 import { useState } from 'react';
 
 import CodeSvg from '../UI/SVGIcons/CodeSvg';
+
+import styles from './ModeSwitcher.module.css';
 
 function ModeSwitcher() {
   const [mode, setMode] = useState<string | number>('Constructor');
@@ -10,11 +12,13 @@ function ModeSwitcher() {
   const CodeIcon = () => <Icon component={CodeSvg} />;
 
   const modeOptions = [
-    { label: 'Constructor', value: 'Constructor', icon: <EyeOutlined /> },
-    { label: 'Runtime', value: 'Runtime', icon: <CodeIcon /> },
+    { label: 'Runtime', value: 'Runtime', icon: <EyeOutlined /> },
+    { label: 'Constructor', value: 'Constructor', icon: <CodeIcon /> },
   ];
   return (
-    <Segmented options={modeOptions} value={mode} onChange={setMode} />
+    <div className={styles.container}>
+      <Segmented options={modeOptions} value={mode} onChange={setMode} size="large" />
+    </div>
   );
 }
 

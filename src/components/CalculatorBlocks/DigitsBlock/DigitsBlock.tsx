@@ -1,17 +1,20 @@
-import { Card, Space } from 'antd';
-
 import DefaultButton from '../../UI/Buttons/DefaultButton';
+
+import styles from './DigitsBlock.module.css';
 
 function DigitsBlock() {
   const values = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '0', ','];
+
   return (
-    <Space>
-      <Card type="inner">
+    <div className={styles.container}>
+      <ul className={styles.list}>
         {values.map((value) => (
-          <DefaultButton key={value} value={value} />
+          <li key={value} className={styles.item}>
+            <DefaultButton value={value} />
+          </li>
         ))}
-      </Card>
-    </Space>
+      </ul>
+    </div>
   );
 }
 

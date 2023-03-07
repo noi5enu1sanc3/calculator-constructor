@@ -1,9 +1,9 @@
-import { Button } from 'antd';
+import styles from './Button.module.css';
 
 function PrimaryButton() {
-  return <Button type="primary">
+  return <button className={styles.primaryButton}>
     =
-  </Button>;
+  </button>;
 }
 
 export default PrimaryButton;

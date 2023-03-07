@@ -1,14 +1,15 @@
-import { Card } from 'antd';
-import React, { useState } from 'react';
+import { useState } from 'react';
+
+import styles from './DisplayBlock.module.css';
 
 function DisplayBlock() {
   const [value, setValue] = useState(0);
   return (
-    <Card type="inner">
-      <div className="display-content">
-        {value}
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <span className={styles.text}>{value}</span>
       </div>
-    </Card>
+    </div>
   );
 }
 

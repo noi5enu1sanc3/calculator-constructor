@@ -1,21 +1,19 @@
-import { Card, Space } from 'antd';
 import DefaultButton from '../../UI/Buttons/DefaultButton';
+
+import styles from './OperatorsBlock.module.css';
 
 function OperatorsBlock() {
   const values = ['/', 'x', '-', '+'];
   return (
-    <Space>
-      <Card>
-        {
-          values.map(value => (
-            <DefaultButton
-              key={value}
-              value={value}
-            />
-          ))
-        }
-      </Card>
-    </Space>
+    <div className={styles.container}>
+      <ul className={styles.list}>
+        {values.map((value) => (
+          <li className={styles.item} key={value}>
+            <DefaultButton value={value} />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

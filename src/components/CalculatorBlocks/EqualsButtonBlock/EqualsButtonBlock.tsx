@@ -1,13 +1,12 @@
-import { Card, Space } from 'antd';
 import PrimaryButton from '../../UI/Buttons/PrimaryButton';
+
+import styles from './EqualsButtonBlock.module.css';
 
 function EqualsButtonBlock() {
   return (
-    <Space>
-      <Card>
-        <PrimaryButton />
-      </Card>
-    </Space>
+    <div className={styles.container}>
+      <PrimaryButton />
+    </div>
   );
 }
 

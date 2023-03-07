@@ -1,0 +1,23 @@
+@import '../../../assets/styles/variables.css';
+
+.defaultButton {
+  padding: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: var(--sp-lg) 0;
+  border: 1px solid var(--border-lighter-grey);
+  border-radius: var(--border-radius-large);
+  width: 100%;
+}
+
+.primaryButton {
+  padding: 0;
+  border: none;
+  outline: none;
+  background-color: var(--blue-primary);
+  border-radius: var(--border-radius-large);
+  padding: var(--sp-xl) 0;
+  width: 100%;
+  color: #fff;
+}
