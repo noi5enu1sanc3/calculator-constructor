@@ -1,5 +1,3 @@
-// import CalculatorBlocksContainer from '../CalculatorBlocksContainer/CalculatorBlocksContainer';
-
 import styles from './Sidebar.module.css';
 
 type Props = {
@@ -9,7 +7,6 @@ type Props = {
 function Sidebar({children}: Props) {
   return (
     <div className={styles.container}>
-      {/* <CalculatorBlocksContainer /> */}
       {children}
     </div>
   );

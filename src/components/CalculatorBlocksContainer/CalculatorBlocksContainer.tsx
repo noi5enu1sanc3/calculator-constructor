@@ -17,9 +17,9 @@ function CalculatorBlocksContainer({blocks}: Props) {
   return (
     <div className={styles.container}>
       {blocks.map(block => (
-        <DraggableItem key={block.id} id={block.id}>
+        !block.wasDragged ? (<DraggableItem key={block.id} id={block.id}>
           {block.element}
-        </DraggableItem>
+        </DraggableItem>) : block.element
       ))}
     </div>
   );
