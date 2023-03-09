@@ -5,6 +5,7 @@
   border: 2px dashed var(--border-darker-grey);
   display: flex;
   flex-direction: column;
+  gap: var(--sp-md);
 }
 
 .tip {

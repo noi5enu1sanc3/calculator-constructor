@@ -1,11 +1,16 @@
-import CalculatorBlocksContainer from '../CalculatorBlocksContainer/CalculatorBlocksContainer';
+// import CalculatorBlocksContainer from '../CalculatorBlocksContainer/CalculatorBlocksContainer';
 
 import styles from './Sidebar.module.css';
 
-function Sidebar() {
+type Props = {
+  children?: React.ReactNode
+};
+
+function Sidebar({children}: Props) {
   return (
     <div className={styles.container}>
-      <CalculatorBlocksContainer />
+      {/* <CalculatorBlocksContainer /> */}
+      {children}
     </div>
   );
 }
