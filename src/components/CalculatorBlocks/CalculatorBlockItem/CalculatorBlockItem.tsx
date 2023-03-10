@@ -7,18 +7,20 @@ type CalculatorBlockItemProps = {
     transition?: string;
   };
   onRemove?(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void;
+  id: string
 };
 
 const CalculatorBlockItem = forwardRef(
-  ({ children, style, onRemove, ...props }: CalculatorBlockItemProps, ref: Ref<HTMLInputElement>) => {
+  ({ children, style, onRemove, id, ...props }: CalculatorBlockItemProps, ref: Ref<HTMLInputElement>) => {
     return (
       <div
         {...props}
         ref={ref}
         style={style}
+        id={id}
         onClick={(event) => {
           if (event.detail == 2) {
-            // console.log('Double Clicked');
+            console.log('Double Clicked');
             onRemove ? onRemove(event) : undefined
           }
         }}

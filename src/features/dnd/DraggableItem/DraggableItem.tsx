@@ -6,7 +6,7 @@ import CalculatorBlockItem from '../../../components/CalculatorBlocks/Calculator
 type Props = {
   id: string;
   children: JSX.Element;
-  onRemove?(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void;
+  onRemove?(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void;
 };
 
 function DraggableItem({ id, children, onRemove }: Props) {
@@ -18,7 +18,7 @@ function DraggableItem({ id, children, onRemove }: Props) {
   };
 
   return (
-    <CalculatorBlockItem ref={setNodeRef} {...attributes} {...listeners} onRemove={onRemove} style={style}>
+    <CalculatorBlockItem ref={setNodeRef} {...attributes} {...listeners} onRemove={onRemove} style={style} id={id}>
       {children}
     </CalculatorBlockItem>
   );

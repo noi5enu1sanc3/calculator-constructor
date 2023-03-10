@@ -39,7 +39,7 @@ function Main() {
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        delay: 100,
+        delay: 150,
         tolerance: 5,
       },
     })
@@ -48,10 +48,26 @@ function Main() {
   function handleDragStart(event: DragStartEvent) {
     const target = blocks.find((el) => el.id === event.active.id);
     if (target) setActiveItem(target);
+
+    // const myEvent = event.activatorEvent as PointerEvent;
+    // console.log(myEvent.detail);
+    // if (myEvent.detail === 2) {
+    //   if (activeItem) {
+    //     const updatedCanvasBlocks: CalculatorBlock[] = [];
+    //     canvasBlocks.forEach((block) => {
+    //       if (block.id !== activeItem.id) updatedCanvasBlocks.push(block);
+    //     });
+
+    //     const updatedBlocks = blocks.map((block) =>
+    //       block.id === activeItem.id ? { ...block, wasDragged: false } : block
+    //     );
+    //     setBlocks(updatedBlocks);
+    //     setCanvasBlocks(updatedCanvasBlocks);
+    //   }
+    // }
   }
 
   function handleDragEnd(event: DragEndEvent) {
-    console.log(event);
     const { over, active } = event;
     const activeEl = blocks.find((el) => el.id === active.id);
     const overEl = blocks.find((el) => el.id === over?.id);
@@ -60,7 +76,7 @@ function Main() {
 
     const isDraggedIntoBlankCanvas = over.id === 'canvas';
     const isDraggedOntoElement = active.id !== over.id && over.id !== 'canvas' && !activeItem.wasDragged;
-    const isMovingInsideCanvas = overEl && active.id !== over.id && activeItem.wasDragged;
+    const isSortingCanvas = overEl && active.id !== over.id && activeItem.wasDragged;
 
     if (isDraggedIntoBlankCanvas) {
       const updatedBlocks = blocks.map((block) => (block.id === active.id ? { ...block, wasDragged: true } : block));
@@ -82,31 +98,25 @@ function Main() {
       if (targetBlock) setCanvasBlocks([...before, targetBlock, ...after]);
     }
 
-    if (isMovingInsideCanvas) {
+    if (isSortingCanvas) {
       const activeIndex = canvasBlocks.indexOf(activeEl);
       const overIndex = canvasBlocks.indexOf(overEl);
-      const updatedCanvasBlocks = arrayMove(canvasBlocks, overIndex, activeIndex);
+      const updatedCanvasBlocks = arrayMove(canvasBlocks, activeIndex, overIndex);
       setCanvasBlocks(updatedCanvasBlocks);
     }
 
     //setActiveItem(null);
   }
 
-  function handleRemoveFromCanvas(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    console.log(e.currentTarget);
-    console.log('double clicked');
-    console.log(activeItem);
-    if (activeItem) {
-      //const target = canvasBlocks.find(item => item.id === activeItem.id);
-      const updatedCanvasBlocks: CalculatorBlock[] = [];
-      canvasBlocks.forEach((block) => {
-        if (block.id !== activeItem.id) updatedCanvasBlocks.push(block);
-      });
-
-      const updatedBlocks = blocks.map((block) => (block.id === activeItem.id ? { ...block, wasDragged: false } : block));
-      setBlocks(updatedBlocks);
-      setCanvasBlocks(updatedCanvasBlocks)
-    }
+  function handleRemoveFromCanvas(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    const removeId = event.currentTarget.id;
+    const updatedCanvasBlocks: CalculatorBlock[] = [];
+    canvasBlocks.forEach((block) => {
+      if (block.id !== removeId) updatedCanvasBlocks.push(block);
+    });
+    const updatedBlocks = blocks.map((block) => (block.id === removeId ? { ...block, wasDragged: false } : block));
+    setBlocks(updatedBlocks);
+    setCanvasBlocks(updatedCanvasBlocks);
   }
 
   const renderBlock = (id: BlockId) => {
