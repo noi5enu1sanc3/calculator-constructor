@@ -21,7 +21,7 @@ const CalculatorBlockItem = forwardRef(
         onClick={(event) => {
           if (event.detail == 2) {
             console.log('Double Clicked');
-            onRemove ? onRemove(event) : undefined
+            onRemove ? onRemove(event) : undefined;
           }
         }}
       >

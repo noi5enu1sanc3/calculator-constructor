@@ -2,6 +2,7 @@ import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
 import DraggableItem from '../../features/dnd/DraggableItem/DraggableItem';
+import SortableItem from '../../features/dnd/SortableItem/SortableItem';
 import { BlockId } from '../../utils/constants';
 import { CalculatorBlock } from '../../utils/types';
 import DigitsBlock from '../CalculatorBlocks/DigitsBlock/DigitsBlock';
@@ -20,6 +21,9 @@ function Canvas({ canvasBlocks, onRemove }: Props) {
   const {setNodeRef} = useDroppable({
     id: 'canvas'
   });
+
+  const items = canvasBlocks.map((item) => item.id);
+
   const renderBlock = (id: BlockId) => {
     switch (id) {
     case BlockId.Display:
@@ -33,7 +37,7 @@ function Canvas({ canvasBlocks, onRemove }: Props) {
     }
   };
   return (
-    <SortableContext items={canvasBlocks} strategy={verticalListSortingStrategy}>
+    <SortableContext items={items} strategy={verticalListSortingStrategy}>
       <div className={styles.container} ref={setNodeRef}>
         {!canvasBlocks.length ? (
           <div className={styles.tip}>
@@ -47,9 +51,9 @@ function Canvas({ canvasBlocks, onRemove }: Props) {
           </div>
         ) : (
           canvasBlocks.map((block) => (
-            <DraggableItem key={block.id} id={block.id} onRemove={onRemove}>
+            <SortableItem key={block.id} id={block.id} onRemove={onRemove}>
               {renderBlock(block.id)}
-            </DraggableItem>
+            </SortableItem>
           ))
         )}
       </div>
