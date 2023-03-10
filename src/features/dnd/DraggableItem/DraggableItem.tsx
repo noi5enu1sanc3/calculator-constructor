@@ -6,17 +6,19 @@ import CalculatorBlockItem from '../../../components/CalculatorBlocks/Calculator
 type Props = {
   id: string;
   children: JSX.Element;
+  onRemove?(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void;
 };
 
-function DraggableItem({ id, children }: Props) {
+function DraggableItem({ id, children, onRemove }: Props) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: id });
 
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
   };
+
   return (
-    <CalculatorBlockItem ref={setNodeRef} {...attributes} {...listeners} style={style}>
+    <CalculatorBlockItem ref={setNodeRef} {...attributes} {...listeners} onRemove={onRemove} style={style}>
       {children}
     </CalculatorBlockItem>
   );
