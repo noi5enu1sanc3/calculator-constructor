@@ -5,3 +5,12 @@
   padding: var(--sp-xs);
   border-radius: var(--border-radius-small);
 }
+
+.disabled {
+  opacity: .5;
+  box-shadow: none;
+}
+
+.onCanvas {
+  box-shadow: none;
+}

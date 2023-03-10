@@ -1,0 +1,6 @@
+@import '../../../assets/styles/variables.css';
+
+.placeholder {
+  border: 1px solid var(--blue-primary);
+  height: 2px;
+}

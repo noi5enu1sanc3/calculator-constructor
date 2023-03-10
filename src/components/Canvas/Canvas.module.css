@@ -8,6 +8,10 @@
   gap: var(--sp-md);
 }
 
+.withItems {
+  border: none;
+}
+
 .tip {
   align-self: center;
   display: flex;

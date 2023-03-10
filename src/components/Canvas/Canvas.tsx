@@ -1,14 +1,10 @@
 import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import cx from 'classnames';
 
-import DraggableItem from '../../features/dnd/DraggableItem/DraggableItem';
 import SortableItem from '../../features/dnd/SortableItem/SortableItem';
-import { BlockId } from '../../utils/constants';
 import { CalculatorBlock } from '../../utils/types';
-import DigitsBlock from '../CalculatorBlocks/DigitsBlock/DigitsBlock';
-import DisplayBlock from '../CalculatorBlocks/DisplayBlock/DisplayBlock';
-import EqualsButtonBlock from '../CalculatorBlocks/EqualsButtonBlock/EqualsButtonBlock';
-import OperatorsBlock from '../CalculatorBlocks/OperatorsBlock/OperatorsBlock';
+import CalculatorElement from '../CalculatorBlocks/CalculatorElement/CalculatorElement';
 
 import styles from './Canvas.module.css';
 
@@ -24,21 +20,9 @@ function Canvas({ canvasBlocks, onRemove }: Props) {
 
   const items = canvasBlocks.map((item) => item.id);
 
-  const renderBlock = (id: BlockId) => {
-    switch (id) {
-    case BlockId.Display:
-      return <DisplayBlock />;
-    case BlockId.Operators:
-      return <OperatorsBlock />;
-    case BlockId.Digits:
-      return <DigitsBlock />;
-    case BlockId.Equals:
-      return <EqualsButtonBlock />;
-    }
-  };
   return (
     <SortableContext items={items} strategy={verticalListSortingStrategy}>
-      <div className={styles.container} ref={setNodeRef}>
+      <div className={cx(styles.container, {[styles.withItems]: canvasBlocks.length > 0})} ref={setNodeRef}>
         {!canvasBlocks.length ? (
           <div className={styles.tip}>
             <div className={styles.icon}></div>
@@ -52,7 +36,7 @@ function Canvas({ canvasBlocks, onRemove }: Props) {
         ) : (
           canvasBlocks.map((block) => (
             <SortableItem key={block.id} id={block.id} onRemove={onRemove}>
-              {renderBlock(block.id)}
+              <CalculatorElement id={block.id} isOnCanvas={true}/>
             </SortableItem>
           ))
         )}

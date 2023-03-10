@@ -1,5 +1,4 @@
 import { useDraggable } from '@dnd-kit/core';
-import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 import CalculatorBlockItem from '../../../components/CalculatorBlocks/CalculatorBlockItem/CalculatorBlockItem';
@@ -11,7 +10,6 @@ type Props = {
 };
 
 function DraggableItem({ id, children, onRemove }: Props) {
-  // const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: id });
   const { attributes, listeners, setNodeRef, transform } = useDraggable({ id: id });
 
   const style = {

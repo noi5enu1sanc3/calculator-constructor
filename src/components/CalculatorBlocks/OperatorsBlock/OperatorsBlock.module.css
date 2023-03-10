@@ -15,3 +15,12 @@
 .item {
   flex-grow: 1;
 }
+
+.disabled {
+  opacity: .5;
+  box-shadow: none;
+}
+
+.onCanvas {
+  box-shadow: none;
+}

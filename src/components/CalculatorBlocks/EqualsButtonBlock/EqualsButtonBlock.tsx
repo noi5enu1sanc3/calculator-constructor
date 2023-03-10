@@ -1,10 +1,17 @@
+import cx from 'classnames';
+
 import PrimaryButton from '../../UI/Buttons/PrimaryButton';
 
 import styles from './EqualsButtonBlock.module.css';
 
-function EqualsButtonBlock() {
+type Props = {
+  disabled: boolean;
+  isOnCanvas: boolean;
+}
+
+function EqualsButtonBlock({ disabled, isOnCanvas }: Props) {
   return (
-    <div className={styles.container}>
+    <div className={cx(styles.container, {[styles.disabled]: disabled, [styles.onCanvas]: isOnCanvas})}>
       <PrimaryButton />
     </div>
   );

@@ -16,3 +16,12 @@
 .text {
   font-size: 36px;
 }
+
+.disabled {
+  opacity: .5;
+  box-shadow: none;
+}
+
+.onCanvas {
+  box-shadow: none;
+}
