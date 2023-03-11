@@ -18,7 +18,7 @@ import { createPortal } from 'react-dom';
 import CalculatorElement from '../../components/CalculatorBlocks/CalculatorElement/CalculatorElement';
 import CalculatorBlocksContainer from '../../components/CalculatorBlocksContainer/CalculatorBlocksContainer';
 import Canvas from '../../components/Canvas/Canvas';
-import { BlockId } from '../../utils/constants';
+import { BlockId, DROPPABLE_ID, LOCKED_BLOCKS } from '../../utils/constants';
 import { CalculatorBlock } from '../../utils/types';
 import Sidebar from '../Sidebar/Sidebar';
 
@@ -71,11 +71,11 @@ function Main() {
   function handleDragOver(event: DragOverEvent) {
     const { over, active } = event;
 
-    const targetBlock = canvasBlocks.find((block) => block.id === active.id); //if already there return
+    const isSorting = canvasBlocks.some((block) => block.id === active.id);
 
-    if (!over || !active || targetBlock || over.id === active.id) return;
+    if (!over || !active || isSorting || over.id === active.id) return;
 
-    const isDraggedIntoBlankCanvas = over.id === 'canvas';
+    const isDraggedIntoBlankCanvas = over.id === DROPPABLE_ID;
 
     setCanvasBlocks((prev) => {
       let newIndex;
@@ -90,6 +90,7 @@ function Main() {
           newIndex = overIndex >= 0 ? overIndex + modifier : prev.length + 1;
         }
       }
+
       return [
         ...prev.slice(0, newIndex),
         blocks.find((b) => b.id === active.id),
@@ -101,7 +102,9 @@ function Main() {
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
 
-    if (!over || !active || !canvasBlocks.find((block) => block.id === active.id)) {
+    const isMovingFromSidebar = !canvasBlocks.find((block) => block.id === active.id);
+
+    if (!over || !active || isMovingFromSidebar) {
       return;
     }
 
@@ -110,8 +113,14 @@ function Main() {
 
     if (!activeItem || !overItem) return;
 
-    if (canvasBlocks.indexOf(activeItem) !== canvasBlocks.indexOf(overItem)) {
-      setCanvasBlocks((items) => arrayMove(items, canvasBlocks.indexOf(activeItem), canvasBlocks.indexOf(overItem)));
+    const isChangingPosition = canvasBlocks.indexOf(activeItem) !== canvasBlocks.indexOf(overItem);
+
+    if (isChangingPosition) {
+      if (LOCKED_BLOCKS.includes(active.id as BlockId)) {
+        setCanvasBlocks((prev) =>  [blocks.find((b) => b.id === active.id), ...prev.filter((i) => i.id!==active.id)] as CalculatorBlock[]
+        );
+      } else
+        setCanvasBlocks((items) => arrayMove(items, canvasBlocks.indexOf(activeItem), canvasBlocks.indexOf(overItem)));
     }
 
     setActiveItem(null);
@@ -121,10 +130,9 @@ function Main() {
     //setCanvasBlocks(reserveCanvasContainer);
   }
 
-
-
   function handleRemoveFromCanvas(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
     const removeId = event.currentTarget.id;
+    console.log(event.currentTarget)
     setCanvasBlocks((prev) => prev.filter((item) => item.id !== removeId));
   }
 
@@ -142,7 +150,10 @@ function Main() {
           <CalculatorBlocksContainer blocks={blocks} />
         </Sidebar>
         <Canvas canvasBlocks={canvasBlocks} onRemove={handleRemoveFromCanvas} />
-        {createPortal(<DragOverlay>{activeItem ? <CalculatorElement id={activeItem.id} /> : null}</DragOverlay>, document.body)}
+        {createPortal(
+          <DragOverlay>{activeItem ? <CalculatorElement id={activeItem.id} /> : null}</DragOverlay>,
+          document.body
+        )}
       </DndContext>
     </main>
   );

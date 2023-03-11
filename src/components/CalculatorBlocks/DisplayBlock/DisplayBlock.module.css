@@ -24,4 +24,9 @@
 
 .onCanvas {
   box-shadow: none;
+  cursor: not-allowed;
+}
+
+.locked {
+  opacity: 1;
 }

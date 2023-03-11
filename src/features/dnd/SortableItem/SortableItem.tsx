@@ -2,7 +2,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 import CalculatorBlockItem from '../../../components/CalculatorBlocks/CalculatorBlockItem/CalculatorBlockItem';
-import ItemPlaceholder from '../../../components/UI/ItemPlaceholder/ItemPlaceholder';
+import { BlockId, LOCKED_BLOCKS } from '../../../utils/constants';
 
 type Props = {
   id: string;
@@ -11,7 +11,8 @@ type Props = {
 };
 
 function SortableItem({ id, children, onRemove }: Props) {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: id });
+  const isLocked = LOCKED_BLOCKS.includes(id as BlockId);
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: id, disabled: isLocked });
 
   const style = {
     transform: CSS.Translate.toString(transform),

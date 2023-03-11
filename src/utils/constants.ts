@@ -4,3 +4,7 @@ export const enum BlockId {
   Digits = 'DIGITS',
   Equals = 'EQUALS'
 }
+
+export const LOCKED_BLOCKS = [BlockId.Display];
+
+export const DROPPABLE_ID = 'CANVAS';

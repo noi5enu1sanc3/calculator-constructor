@@ -7,13 +7,14 @@ import OperatorsBlock from '../OperatorsBlock/OperatorsBlock';
 type Props = {
   id: BlockId;
   disabled?: boolean;
-  isOnCanvas?: boolean
+  isOnCanvas?: boolean;
+  onRemove?(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void;
 };
 
-function CalculatorElement({ id, disabled = false, isOnCanvas = false }: Props) {
+function CalculatorElement({ id, disabled = false, isOnCanvas = false, onRemove }: Props) {
   switch (id) {
     case BlockId.Display:
-      return <DisplayBlock key={id} disabled={disabled} isOnCanvas={isOnCanvas} />;
+      return <DisplayBlock key={id} disabled={disabled} isOnCanvas={isOnCanvas} onRemove={onRemove} id={id} />;
     case BlockId.Operators:
       return <OperatorsBlock key={id} disabled={disabled} isOnCanvas={isOnCanvas} />;
     case BlockId.Digits:

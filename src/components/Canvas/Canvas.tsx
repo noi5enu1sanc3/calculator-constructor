@@ -3,6 +3,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import cx from 'classnames';
 
 import SortableItem from '../../features/dnd/SortableItem/SortableItem';
+import { BlockId, DROPPABLE_ID, LOCKED_BLOCKS } from '../../utils/constants';
 import { CalculatorBlock } from '../../utils/types';
 import CalculatorElement from '../CalculatorBlocks/CalculatorElement/CalculatorElement';
 
@@ -14,15 +15,15 @@ type Props = {
 };
 
 function Canvas({ canvasBlocks, onRemove }: Props) {
-  const {setNodeRef} = useDroppable({
-    id: 'canvas'
+  const { setNodeRef } = useDroppable({
+    id: DROPPABLE_ID,
   });
 
   const items = canvasBlocks.map((item) => item.id);
 
   return (
     <SortableContext items={items} strategy={verticalListSortingStrategy}>
-      <div className={cx(styles.container, {[styles.withItems]: canvasBlocks.length > 0})} ref={setNodeRef}>
+      <div className={cx(styles.container, { [styles.withItems]: canvasBlocks.length > 0 })} ref={setNodeRef}>
         {!canvasBlocks.length ? (
           <div className={styles.tip}>
             <div className={styles.icon}></div>
@@ -34,11 +35,21 @@ function Canvas({ canvasBlocks, onRemove }: Props) {
             </div>
           </div>
         ) : (
-          canvasBlocks.map((block) => (
-            <SortableItem key={block.id} id={block.id} onRemove={onRemove}>
-              <CalculatorElement id={block.id} isOnCanvas={true}/>
-            </SortableItem>
-          ))
+          canvasBlocks.map((block) =>
+            !LOCKED_BLOCKS.includes(block.id) ? (
+              <SortableItem key={block.id} id={block.id} onRemove={onRemove}>
+                <CalculatorElement id={block.id} isOnCanvas={true} disabled={LOCKED_BLOCKS.includes(block.id)} />
+              </SortableItem>
+            ) : (
+              <CalculatorElement
+                key={block.id}
+                id={block.id}
+                isOnCanvas={true}
+                disabled={LOCKED_BLOCKS.includes(block.id)}
+                onRemove={onRemove}
+              />
+            )
+          )
         )}
       </div>
     </SortableContext>
