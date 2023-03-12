@@ -144,6 +144,13 @@ export const useCalculator = () => {
     return CALCULATE_ACTION;
   };
 
+  const getOperation = (value: string) => {
+    if (value === OPERATIONS.ADDITION) return OPERATIONS.ADDITION;
+    if (value === OPERATIONS.DIVISION) return OPERATIONS.DIVISION;
+    if (value === OPERATIONS.MULTIPLICATION) return OPERATIONS.MULTIPLICATION;
+    return OPERATIONS.SUBTRACTION;
+  };
+
   const createResultString = (value: string) => {
     const action = getaction(value);
 
@@ -172,13 +179,6 @@ export const useCalculator = () => {
         ? fitToLength(MAX_LENGTH, calculate(displayValue, calculator.operator, calculator.secondValue).toString())
         : fitToLength(MAX_LENGTH, calculate(calculator.firstValue, calculator.operator, displayValue).toString())
       : displayValue;
-  };
-
-  const getOperation = (value: string) => {
-    if (value === OPERATIONS.ADDITION) return OPERATIONS.ADDITION;
-    if (value === OPERATIONS.DIVISION) return OPERATIONS.DIVISION;
-    if (value === OPERATIONS.MULTIPLICATION) return OPERATIONS.MULTIPLICATION;
-    return OPERATIONS.SUBTRACTION;
   };
 
   return { displayValue, handleClick, isError };
