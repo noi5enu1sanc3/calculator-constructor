@@ -1,0 +1,11 @@
+@import '../../../assets/styles/variables.css';
+
+.list {
+  display: flex;
+  width: 100%;
+  gap: var(--sp-s);
+}
+
+.item {
+  flex-grow: 1;
+}

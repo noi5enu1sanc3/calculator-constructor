@@ -1,0 +1,7 @@
+.main {
+  display: grid;
+  grid-template-columns: repeat(2, 240px);
+  column-gap: var(--sp-xxxxxl);
+  margin: 0 auto;
+  justify-content: center;
+}
