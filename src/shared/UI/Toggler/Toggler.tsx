@@ -1,11 +1,10 @@
 import Icon, { EyeOutlined } from '@ant-design/icons';
 import { Segmented } from 'antd';
-import { useState } from 'react';
+
+import CodeSvg from '../SVGIcons/CodeSvg';
 
 import styles from './Toggler.module.css';
 
-import CodeSvg from '../SVGIcons/CodeSvg';
-import { Mode } from '../../../features/modeSwitcher/utils/constants';
 
 type Props = {
   options: string[];

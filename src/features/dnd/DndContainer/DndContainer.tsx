@@ -25,9 +25,6 @@ function DndContainer({ children }: Props) {
     handleDragStart,
     handleDragCancel,
     handleDragOver,
-    handleRemoveFromCanvas,
-    blocks,
-    canvasBlocks,
   } = useConstructor(constructorBlocks);
 
   return (

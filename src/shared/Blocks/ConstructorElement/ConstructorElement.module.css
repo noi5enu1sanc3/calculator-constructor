@@ -8,6 +8,7 @@
 
 .container button {
   cursor: move;
+  font-weight: 500;
 }
 
 .disabled {

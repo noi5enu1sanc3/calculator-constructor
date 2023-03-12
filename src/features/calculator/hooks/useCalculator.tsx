@@ -54,7 +54,7 @@ export const useCalculator = () => {
       return;
     }
 
-    if(isError) return;
+    if (isError) return;
 
     setCalculator((prev: Calculator) => {
       return {
@@ -117,8 +117,13 @@ export const useCalculator = () => {
 
     if (res.includes(DECIMAL_SYMBOL)) {
       const intSymbolCount = res.split(DECIMAL_SYMBOL)[0].length + 1;
-      const newFloat = parseFloat(res);
-      res = newFloat.toFixed(maxLength - intSymbolCount);
+      const decimalCount = maxLength - intSymbolCount;
+      if (decimalCount <= 0) {
+        res = Math.round(Number(res)).toString();
+      } else {
+        const newFloat = parseFloat(res);
+        res = newFloat.toFixed(maxLength - intSymbolCount);
+      }
     }
     return res;
   };

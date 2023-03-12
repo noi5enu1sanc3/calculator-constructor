@@ -18,6 +18,6 @@ export const OPERATOR_ACTION = 'operator';
 export const INITIAL_VALUE = '0';
 export const DECIMAL_SYMBOL = '.';
 
-export const MAX_LENGTH = 10;
+export const MAX_LENGTH = 9;
 
 export const INFINITY_MESSAGE = 'Не определено';
