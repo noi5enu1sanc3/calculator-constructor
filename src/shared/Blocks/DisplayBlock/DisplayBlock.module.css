@@ -1,13 +1,24 @@
 @import '../../../assets/styles/variables.css';
 
+.container {
+  min-height: 60px;
+}
+
 .content {
   border-radius: var(--border-radius-large);
   background-color: var(--fill-light-grey);
   padding: var(--sp-xs) var(--sp-s);
-  text-align: end;
   overflow: hidden;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .text {
   font-size: 36px;
+}
+
+.error {
+  font-size: 24px;
 }

@@ -9,12 +9,12 @@ type Props = {
 };
 
 function RuntimeContainer({ blockIds }: Props) {
-  const { displayValue, handleClick } = useCalculator();
+  const { displayValue, handleClick, isError } = useCalculator();
 
   return (
     <div onClick={handleClick} className={styles.container}>
       {blockIds.map((id) => (
-        <ConstructorElement key={id} id={id} value={displayValue} isRuntime={true} />
+        <ConstructorElement key={id} id={id} value={displayValue} isRuntime={true} isError={isError} />
       ))}
     </div>
   );

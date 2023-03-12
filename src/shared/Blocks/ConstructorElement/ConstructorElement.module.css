@@ -21,6 +21,7 @@
 
 .runtime {
   cursor: default;
+  box-shadow: none;
 }
 
 .runtime button {

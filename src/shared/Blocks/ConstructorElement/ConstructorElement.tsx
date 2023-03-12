@@ -17,13 +17,14 @@ type Props = {
   value?: string;
   isRuntime?: boolean;
   isDragging?: boolean;
+  isError?: boolean;
 };
 
-function ConstructorElement({ id, disabled, isOnCanvas, onRemove, value = INITIAL_VALUE, isRuntime, isDragging }: Props) {
+function ConstructorElement({ id, disabled, isOnCanvas, onRemove, value = INITIAL_VALUE, isRuntime, isDragging, isError }: Props) {
   const renderBlock = (id: BlockId) => {
     switch (id) {
     case BlockId.DISPLAY:
-      return <DisplayBlock value={value} />;
+      return <DisplayBlock value={value} isError={isError} />;
     case BlockId.OPERATORS:
       return <OperatorsBlock />;
     case BlockId.DIGITS:

@@ -6,6 +6,7 @@ import {
   DECIMAL_ACTION,
   DECIMAL_SYMBOL,
   DIGIT_VALUES,
+  INFINITY_MESSAGE,
   INITIAL_VALUE,
   MAX_LENGTH,
   NUMBER_ACTION,
@@ -28,14 +29,32 @@ export const useCalculator = () => {
     previousAction: '',
   });
   const [displayValue, setDisplayValue] = useState<string>(INITIAL_VALUE);
+  const [isError, setIsError] = useState(false);
 
   const handleClick = (event: React.MouseEvent) => {
     const { nodeName, textContent } = event.target as HTMLElement;
 
     if (nodeName !== BUTTON_NODE_NAME || !textContent) return;
 
-    const newValue = createResultString(textContent);
     const action = getaction(textContent);
+
+    const newValue = createResultString(textContent);
+
+    if (newValue.includes(INFINITY_MESSAGE)) {
+      setIsError(false);
+      setDisplayValue(INITIAL_VALUE);
+      resetCalculator();
+      return;
+    }
+
+    if (newValue.includes('Infinity')) {
+      setIsError(true);
+      setDisplayValue(INFINITY_MESSAGE);
+      resetCalculator();
+      return;
+    }
+
+    if(isError) return;
 
     setCalculator((prev: Calculator) => {
       return {
@@ -79,7 +98,16 @@ export const useCalculator = () => {
       });
     }
 
-    setDisplayValue(newValue); //TODO reset all
+    setDisplayValue(newValue);
+  };
+
+  const resetCalculator = () => {
+    setCalculator({
+      firstValue: INITIAL_VALUE,
+      operator: '',
+      secondValue: '',
+      previousAction: '',
+    });
   };
 
   const fitToLength = (maxLength: number, value: string): string => {
@@ -148,5 +176,5 @@ export const useCalculator = () => {
     return OPERATIONS.SUBTRACTION;
   };
 
-  return { displayValue, handleClick };
+  return { displayValue, handleClick, isError };
 };
