@@ -1,17 +1,13 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-import { BlockId } from '../dnd/utils/constants';
+import { createSlice } from '@reduxjs/toolkit';
 
 import { Mode } from './utils/constants';
 
 type ModeState = {
   mode: Mode;
-  elementIds: BlockId[];
 };
 
 const initialState: ModeState = {
   mode: Mode.CONSTRUCTOR,
-  elementIds: [],
 };
 
 const modeSlice = createSlice({
@@ -20,9 +16,6 @@ const modeSlice = createSlice({
   reducers: {
     switchMode: (state) => {
       state.mode = state.mode === Mode.CONSTRUCTOR ? Mode.RUNTIME : Mode.CONSTRUCTOR;
-    },
-    setElements: (state, action: PayloadAction<BlockId[]>) => {
-      state.elementIds = action.payload;
     }
   },
 });

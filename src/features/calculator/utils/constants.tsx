@@ -16,3 +16,6 @@ export const CALCULATE_ACTION = 'calculate';
 export const OPERATOR_ACTION = 'operator';
 
 export const INITIAL_VALUE = '0';
+export const DECIMAL_SYMBOL = '.';
+
+export const MAX_LENGTH = 10;

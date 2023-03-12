@@ -2,9 +2,14 @@ export enum BlockId {
   DISPLAY = 'display',
   OPERATORS = 'operators',
   DIGITS = 'digits',
-  EQUALS = 'equals'
+  EQUALS = 'equals',
 }
 
 export const LOCKED_BLOCKS = [BlockId.DISPLAY];
 
-export const DROPPABLE_ID = 'CANVAS';
+export const DROPPABLE_CONTAINER_ID = 'CANVAS';
+
+export const SENSOR_OPTIONS = {
+  delay: 150,
+  tolerance: 5,
+};

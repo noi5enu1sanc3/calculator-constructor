@@ -1,7 +1,7 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-import CalculatorBlockItem from '../../../components/CalculatorBlocks/CalculatorBlockItem/CalculatorBlockItem';
+import Item from '../Item/Item';
 import { BlockId, LOCKED_BLOCKS } from '../utils/constants';
 
 type Props = {
@@ -20,9 +20,9 @@ function SortableItem({ id, children, onRemove }: Props) {
   };
 
   return (
-    <CalculatorBlockItem ref={setNodeRef} {...attributes} {...listeners} onRemove={onRemove} style={style} id={id}>
+    <Item ref={setNodeRef} {...attributes} {...listeners} onRemove={onRemove} style={style} id={id}>
       {children}
-    </CalculatorBlockItem>
+    </Item>
   );
 }
 

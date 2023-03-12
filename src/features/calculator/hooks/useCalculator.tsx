@@ -4,8 +4,10 @@ import {
   BUTTON_NODE_NAME,
   CALCULATE_ACTION,
   DECIMAL_ACTION,
+  DECIMAL_SYMBOL,
   DIGIT_VALUES,
   INITIAL_VALUE,
+  MAX_LENGTH,
   NUMBER_ACTION,
   OPERATIONS,
   OPERATORS,
@@ -13,7 +15,13 @@ import {
 } from '../utils/constants';
 
 export const useCalculator = () => {
-  const [calculator, setCalculator] = useState<any>({
+  type Calculator = {
+    firstValue: string;
+    operator: string;
+    secondValue: string;
+    previousAction: string;
+  };
+  const [calculator, setCalculator] = useState<Calculator>({
     firstValue: INITIAL_VALUE,
     operator: '',
     secondValue: '',
@@ -26,11 +34,10 @@ export const useCalculator = () => {
 
     if (nodeName !== BUTTON_NODE_NAME || !textContent) return;
 
+    const newValue = createResultString(textContent);
     const action = getaction(textContent);
 
-    const newValue = createResultString(textContent);
-
-    setCalculator((prev: any) => {
+    setCalculator((prev: Calculator) => {
       return {
         ...prev,
         previousAction: action,
@@ -48,7 +55,7 @@ export const useCalculator = () => {
           : displayValue;
       const updatedpreviousAction = action;
 
-      setCalculator((prev: any) => {
+      setCalculator((prev: Calculator) => {
         return {
           ...prev,
           operator: updatedOperator,
@@ -63,7 +70,7 @@ export const useCalculator = () => {
         calculator.firstValue && calculator.previousAction === CALCULATE_ACTION ? calculator.secondValue : displayValue;
       const updatedpreviousAction = action;
 
-      setCalculator((prev: any) => {
+      setCalculator((prev: Calculator) => {
         return {
           ...prev,
           secondValue: updatedsecondValue,
@@ -72,7 +79,20 @@ export const useCalculator = () => {
       });
     }
 
-    setDisplayValue(newValue === 'Infinity' ? 'Не определено' : newValue); //TODO reset all
+    setDisplayValue(newValue); //TODO reset all
+  };
+
+  const fitToLength = (maxLength: number, value: string): string => {
+    let res = value;
+
+    if (res.length <= maxLength) return res;
+
+    if (res.includes(DECIMAL_SYMBOL)) {
+      const intSymbolCount = res.split(DECIMAL_SYMBOL)[0].length + 1;
+      const newFloat = parseFloat(res);
+      res = newFloat.toFixed(maxLength - intSymbolCount);
+    }
+    return res;
   };
 
   const calculate = (n1: string, operator: string, n2: string): number => {
@@ -85,38 +105,39 @@ export const useCalculator = () => {
   };
 
   const getaction = (value: string) => {
-    if (value === '.') return DECIMAL_ACTION;
+    if (value === DECIMAL_SYMBOL) return DECIMAL_ACTION;
     if (DIGIT_VALUES.includes(value)) return NUMBER_ACTION;
     if (OPERATORS.includes(value)) return OPERATOR_ACTION;
-    if (value === '=') return CALCULATE_ACTION;
+    return CALCULATE_ACTION;
   };
 
   const createResultString = (value: string) => {
     const action = getaction(value);
 
     if (action === NUMBER_ACTION) {
-      return displayValue === '0' ||
+      return displayValue === INITIAL_VALUE ||
         calculator.previousAction === OPERATOR_ACTION ||
         calculator.previousAction === CALCULATE_ACTION
         ? value
-        : displayValue + value;
+        : fitToLength(MAX_LENGTH, displayValue + value);
     }
     if (action === DECIMAL_ACTION) {
-      if (!displayValue.includes('.')) return displayValue + '.';
-      if (calculator.previousAction === OPERATOR_ACTION || calculator.previousAction === CALCULATE_ACTION) return '0.';
+      if (!displayValue.includes(DECIMAL_SYMBOL)) return fitToLength(6, displayValue + DECIMAL_SYMBOL);
+      if (calculator.previousAction === OPERATOR_ACTION || calculator.previousAction === CALCULATE_ACTION)
+        return `${INITIAL_VALUE}${DECIMAL_SYMBOL}`;
     }
     if (action === OPERATOR_ACTION) {
       return calculator.firstValue &&
         calculator.operator &&
         calculator.previousAction !== OPERATOR_ACTION &&
         calculator.previousAction !== CALCULATE_ACTION
-        ? calculate(calculator.firstValue, calculator.operator, displayValue).toString()
+        ? fitToLength(MAX_LENGTH, calculate(calculator.firstValue, calculator.operator, displayValue).toString())
         : displayValue;
     }
-    return calculator.firstValue
+    return calculator.firstValue !== INITIAL_VALUE
       ? calculator.previousAction === CALCULATE_ACTION
-        ? calculate(displayValue, calculator.operator, calculator.secondValue).toString()
-        : calculate(calculator.firstValue, calculator.operator, displayValue).toString()
+        ? fitToLength(MAX_LENGTH, calculate(displayValue, calculator.operator, calculator.secondValue).toString())
+        : fitToLength(MAX_LENGTH, calculate(calculator.firstValue, calculator.operator, displayValue).toString())
       : displayValue;
   };
 

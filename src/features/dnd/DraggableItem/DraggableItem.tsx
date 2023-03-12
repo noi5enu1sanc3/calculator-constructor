@@ -1,7 +1,7 @@
 import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
-import CalculatorBlockItem from '../../../components/CalculatorBlocks/CalculatorBlockItem/CalculatorBlockItem';
+import Item from '../Item/Item';
 
 type Props = {
   id: string;
@@ -17,9 +17,9 @@ function DraggableItem({ id, children, onRemove }: Props) {
   };
 
   return (
-    <CalculatorBlockItem ref={setNodeRef} {...attributes} {...listeners} onRemove={onRemove} style={style} id={id}>
+    <Item ref={setNodeRef} {...attributes} {...listeners} onRemove={onRemove} style={style} id={id}>
       {children}
-    </CalculatorBlockItem>
+    </Item>
   );
 }
 

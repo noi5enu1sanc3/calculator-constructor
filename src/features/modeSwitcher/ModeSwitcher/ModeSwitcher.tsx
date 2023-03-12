@@ -1,4 +1,4 @@
-import Toggler from '../../../components/UI/Toggler/Toggler';
+import Toggler from '../../../shared/UI/Toggler/Toggler';
 import { useAppDispatch, useAppSelector } from '../../../store/hook';
 import { switchMode } from '../modeSlice';
 import { Mode } from '../utils/constants';

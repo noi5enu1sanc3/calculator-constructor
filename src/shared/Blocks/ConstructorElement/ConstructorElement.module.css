@@ -1,0 +1,43 @@
+.container {
+  box-shadow: var(--shadow);
+  padding: var(--sp-xs);
+  border-radius: var(--border-radius-small);
+  background-color: #fff;
+  cursor: move;
+}
+
+.container button {
+  cursor: move;
+}
+
+.disabled {
+  opacity: .5;
+  box-shadow: none;
+}
+
+.onCanvas {
+  box-shadow: none;
+}
+
+.runtime {
+  cursor: default;
+}
+
+.runtime button {
+  cursor: pointer;
+}
+
+.runtime button:active {
+  border-color: none;
+  outline: 2px solid var(--blue-primary);
+  opacity: .8;
+}
+
+.locked {
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.dragging {
+  opacity: .9;
+}

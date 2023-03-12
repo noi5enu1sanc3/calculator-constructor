@@ -1,0 +1,13 @@
+@import '../../../assets/styles/variables.css';
+
+.content {
+  border-radius: var(--border-radius-large);
+  background-color: var(--fill-light-grey);
+  padding: var(--sp-xs) var(--sp-s);
+  text-align: end;
+  overflow: hidden;
+}
+
+.text {
+  font-size: 36px;
+}

@@ -1,20 +1,8 @@
-import {
-  closestCorners,
-  DndContext,
-  DragCancelEvent,
-  DragEndEvent,
-  DragOverlay,
-  DragStartEvent,
-  rectIntersection,
-  useSensors,
-  useSensor,
-  PointerSensor,
-  DragOverEvent,
-} from '@dnd-kit/core';
+import { DragEndEvent, DragStartEvent, useSensors, useSensor, PointerSensor, DragOverEvent } from '@dnd-kit/core';
 import { arrayMove } from '@dnd-kit/sortable';
 import { useState, useEffect } from 'react';
 
-import { BlockId, DROPPABLE_ID, LOCKED_BLOCKS } from '../utils/constants';
+import { BlockId, DROPPABLE_CONTAINER_ID, LOCKED_BLOCKS, SENSOR_OPTIONS } from '../utils/constants';
 import { CalculatorBlock } from '../utils/types';
 
 export const useConstructor = (constructorBlocks: CalculatorBlock[]) => {
@@ -26,8 +14,8 @@ export const useConstructor = (constructorBlocks: CalculatorBlock[]) => {
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        delay: 150,
-        tolerance: 5,
+        delay: SENSOR_OPTIONS.delay,
+        tolerance: SENSOR_OPTIONS.tolerance,
       },
     })
   );
@@ -36,7 +24,6 @@ export const useConstructor = (constructorBlocks: CalculatorBlock[]) => {
     setBlocks((prev) => {
       const updatedBlocks = prev.map((item) => {
         if (canvasBlocks.some((block) => block === item.id)) {
-          //TODO refactor to includes?
           return {
             ...item,
             wasDragged: true,
@@ -53,8 +40,13 @@ export const useConstructor = (constructorBlocks: CalculatorBlock[]) => {
   }, [canvasBlocks]);
 
   function handleDragStart(event: DragStartEvent) {
-    const target = blocks.find((el) => el.id === event.active.id);
+    const { active } = event;
+    const target = blocks.find((el) => el.id === active.id);
     if (target) setActiveItem(target);
+  }
+
+  function handleDragCancel() {
+    setActiveItem(null);
   }
 
   function handleDragOver(event: DragOverEvent) {
@@ -64,7 +56,7 @@ export const useConstructor = (constructorBlocks: CalculatorBlock[]) => {
 
     if (!over || !active || isSorting || over.id === active.id) return;
 
-    const isDraggedIntoBlankCanvas = over.id === DROPPABLE_ID;
+    const isDraggedIntoBlankCanvas = over.id === DROPPABLE_CONTAINER_ID;
 
     const newItem = blocks.find((b) => b.id === active.id);
 
@@ -84,11 +76,11 @@ export const useConstructor = (constructorBlocks: CalculatorBlock[]) => {
           }
         }
 
-        return [
-          ...prev.slice(0, newIndex),
-          mapToId(newItem),
-          ...prev.slice(newIndex, prev.length),
-        ] as BlockId[];
+        if (LOCKED_BLOCKS.includes(active.id as BlockId)) {
+          return [mapToId(newItem), ...prev];
+        }
+
+        return [...prev.slice(0, newIndex), mapToId(newItem), ...prev.slice(newIndex, prev.length)] as BlockId[];
       });
     }
   }
@@ -112,8 +104,7 @@ export const useConstructor = (constructorBlocks: CalculatorBlock[]) => {
     if (isChangingPosition) {
       if (LOCKED_BLOCKS.includes(active.id as BlockId)) {
         setCanvasBlocks(
-          (prev) =>
-            [prev.find((b) => b === active.id), ...prev.filter((i) => i !== active.id)] as BlockId[]
+          (prev) => [prev.find((b) => b === active.id), ...prev.filter((i) => i !== active.id)] as BlockId[]
         );
       } else
         setCanvasBlocks((items) => arrayMove(items, canvasBlocks.indexOf(activeItem), canvasBlocks.indexOf(overItem)));
@@ -133,6 +124,7 @@ export const useConstructor = (constructorBlocks: CalculatorBlock[]) => {
     handleDragEnd,
     handleDragStart,
     handleDragOver,
+    handleDragCancel,
     handleRemoveFromCanvas,
     blocks,
     canvasBlocks,

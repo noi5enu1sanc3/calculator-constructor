@@ -1,7 +1,7 @@
 import { DndContext, DragOverlay } from '@dnd-kit/core';
 import { createPortal } from 'react-dom';
 
-import ConstructorElement from '../../../components/CalculatorBlocks/ConstructorElement/ConstructorElement';
+import ConstructorElement from '../../../shared/Blocks/ConstructorElement/ConstructorElement';
 import { useConstructor } from '../hooks/useConstructor';
 import { BlockId } from '../utils/constants';
 
@@ -23,6 +23,7 @@ function DndContainer({ children }: Props) {
     activeItem,
     handleDragEnd,
     handleDragStart,
+    handleDragCancel,
     handleDragOver,
     handleRemoveFromCanvas,
     blocks,
@@ -34,7 +35,7 @@ function DndContainer({ children }: Props) {
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
       onDragOver={handleDragOver}
-      // collisionDetection={activeItem && activeItem.wasDragged ? closestCorners : rectIntersection} //wrong?
+      onDragCancel={handleDragCancel}
       sensors={sensors}
     >
       {children}
