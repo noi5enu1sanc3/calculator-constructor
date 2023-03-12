@@ -4,3 +4,9 @@
   gap: var(--sp-md);
   height: 100%;
 }
+
+.empty {
+  background-image: url('../../../assets/icons/kitty.svg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
