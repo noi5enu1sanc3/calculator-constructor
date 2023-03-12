@@ -1,13 +1,13 @@
-import ModeSwitcher from '../../components/ModeSwitcher/ModeSwitcher';
-
 import styles from './Header.module.css';
 
-function Header() {
+type Props = {
+  children: JSX.Element;
+};
+
+function Header({ children }: Props) {
   return (
     <header className={styles.header}>
-      <div className={styles.container}>
-        <ModeSwitcher />
-      </div>
+      <div className={styles.container}>{children}</div>
     </header>
   );
 }

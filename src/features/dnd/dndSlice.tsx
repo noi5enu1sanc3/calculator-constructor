@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { BlockId } from '../../utils/constants';
-import { CalculatorBlock } from '../../utils/types';
+import { BlockId } from './utils/constants';
+import { CalculatorBlock } from './utils/types';
 
 type DndState = {
   elements: CalculatorBlock[];
@@ -9,10 +9,7 @@ type DndState = {
 
 const initialState: DndState = {
   elements: [
-    { id: BlockId.Display, wasDragged: false },
-    { id: BlockId.Operators, wasDragged: false },
-    { id: BlockId.Digits, wasDragged: false },
-    { id: BlockId.Equals, wasDragged: false },
+    
   ],
 };
 

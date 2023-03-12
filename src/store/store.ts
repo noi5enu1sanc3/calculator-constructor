@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import dndReducer from '../features/dnd/dndSlice';
+import modeReducer from '../features/modeSwitcher/modeSlice';
 
 const store = configureStore({
   reducer: {
-    dnd: dndReducer,
+    modeState: modeReducer,
   },
 });
 

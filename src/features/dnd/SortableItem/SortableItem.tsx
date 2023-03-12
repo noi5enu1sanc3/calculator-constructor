@@ -2,7 +2,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 import CalculatorBlockItem from '../../../components/CalculatorBlocks/CalculatorBlockItem/CalculatorBlockItem';
-import { BlockId, LOCKED_BLOCKS } from '../../../utils/constants';
+import { BlockId, LOCKED_BLOCKS } from '../utils/constants';
 
 type Props = {
   id: string;

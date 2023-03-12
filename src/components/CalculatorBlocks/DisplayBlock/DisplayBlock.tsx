@@ -1,7 +1,6 @@
 import cx from 'classnames';
-import { useState } from 'react';
 
-import { BlockId } from '../../../utils/constants';
+import { BlockId } from '../../../features/dnd/utils/constants';
 
 import styles from './DisplayBlock.module.css';
 
@@ -10,10 +9,10 @@ type Props = {
   isOnCanvas: boolean;
   onRemove?(e: React.MouseEvent<HTMLDivElement, MouseEvent>): void;
   id: BlockId;
+  value: string;
 };
 
-function DisplayBlock({ disabled, isOnCanvas, onRemove, id }: Props) {
-  const [value, setValue] = useState(0);
+function DisplayBlock({ disabled, isOnCanvas, onRemove, id, value }: Props) {
   return (
     <div
       className={cx(styles.container, {

@@ -4,6 +4,7 @@
   box-shadow: var(--shadow);
   padding: var(--sp-xs);
   border-radius: var(--border-radius-small);
+  background-color: #fff;
 }
 
 .list {
