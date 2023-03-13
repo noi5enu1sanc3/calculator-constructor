@@ -43,19 +43,11 @@ function Canvas({ canvasBlocks, onRemove }: Props) {
         )}
 
         {canvasBlocks.map((block) => {
-          const isItemMovable = !LOCKED_BLOCKS.includes(block);
-          return isItemMovable ? (
+          const isMovable = !LOCKED_BLOCKS.includes(block);
+          return (
             <SortableItem key={block} id={block} onRemove={onRemove}>
-              <ConstructorElement id={block} isOnCanvas={true} disabled={LOCKED_BLOCKS.includes(block)} />
+              <ConstructorElement id={block} isOnCanvas={true} disabled={!isMovable} />
             </SortableItem>
-          ) : (
-            <ConstructorElement
-              key={block}
-              id={block}
-              isOnCanvas={true}
-              disabled={LOCKED_BLOCKS.includes(block)}
-              onRemove={onRemove}
-            />
           );
         })}
       </div>

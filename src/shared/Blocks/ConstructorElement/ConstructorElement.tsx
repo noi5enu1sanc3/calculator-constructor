@@ -40,7 +40,7 @@ function ConstructorElement({ id, disabled, isOnCanvas, onRemove, value = INITIA
         [styles.onCanvas]: isOnCanvas,
         [styles.runtime]: isRuntime,
         [styles.locked]: disabled && isOnCanvas,
-        [styles.dragging]: isDragging
+        [styles.dragging]: isDragging,
       })}
       key={id}
       onDoubleClick={onRemove ? (event) => onRemove(event) : undefined}

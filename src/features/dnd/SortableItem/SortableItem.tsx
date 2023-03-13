@@ -12,7 +12,7 @@ type Props = {
 
 function SortableItem({ id, children, onRemove }: Props) {
   const isLocked = LOCKED_BLOCKS.includes(id as BlockId);
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: id, disabled: isLocked });
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: id, disabled: isLocked });
 
   const style = {
     transform: CSS.Translate.toString(transform),
@@ -20,7 +20,7 @@ function SortableItem({ id, children, onRemove }: Props) {
   };
 
   return (
-    <Item ref={setNodeRef} {...attributes} {...listeners} onRemove={onRemove} style={style} id={id}>
+    <Item ref={setNodeRef} {...attributes} {...listeners} onRemove={onRemove} style={style} id={id} isDragging={isDragging}>
       {children}
     </Item>
   );

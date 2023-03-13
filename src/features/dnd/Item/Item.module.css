@@ -1,0 +1,53 @@
+@import '../../../assets/styles/variables.css';
+
+.item {
+  position: relative;
+}
+
+.ghost > .item::before {
+  position: absolute;
+  left: -4px;
+  top: -2px;
+  display: block;
+  content: '';
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--blue-primary);
+  background-color: var(--blue-primary);
+  transform: rotate(45deg);
+}
+
+.ghost > .item::after {
+  position: absolute;
+  right: -4px;
+  top: -2px;
+  display: block;
+  content: '';
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--blue-primary);
+  background-color: var(--blue-primary);
+  transform: rotate(45deg);
+}
+
+.ghost > .indicator {
+  opacity: 1;
+  position: relative;
+  z-index: 1;
+  margin-bottom: -1px;
+
+}
+
+.item > * {
+  opacity: 0;
+  height: 0;
+}
+
+.ghost > .item {
+  position: absolute;
+  padding: 0;
+  width: 244px;
+  height: 2px;
+  border-color: var(--blue-primary);
+  background-color: var(--blue-primary);
+}
