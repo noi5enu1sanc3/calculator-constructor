@@ -17,10 +17,10 @@ https://noi5enu1sanc3.github.io/calculator-constructor/
 - Sorting blocks that are already on canvas
 - (Almost) fully functional calculator
 
-##TODO:
+## TODO:
 
 - Mobile version
-- Keyboard Sorting
+- Adding keyboard and touch sensors to drag-and-drop
 - Drop indicator when dragging/sorting blocks
 - Test and improve calculator functionality
 
