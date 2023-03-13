@@ -106,8 +106,10 @@ export const useConstructor = (constructorBlocks: CalculatorBlock[]) => {
         setCanvasBlocks(
           (prev) => [prev.find((b) => b === active.id), ...prev.filter((i) => i !== active.id)] as BlockId[]
         );
+      } else if (LOCKED_BLOCKS.includes(over.id as BlockId)) {
+        setCanvasBlocks((prev) => arrayMove(prev, canvasBlocks.indexOf(activeItem), canvasBlocks.indexOf(overItem) + 1));
       } else
-        setCanvasBlocks((items) => arrayMove(items, canvasBlocks.indexOf(activeItem), canvasBlocks.indexOf(overItem)));
+        setCanvasBlocks((prev) => arrayMove(prev, canvasBlocks.indexOf(activeItem), canvasBlocks.indexOf(overItem)));
     }
 
     setActiveItem(null);

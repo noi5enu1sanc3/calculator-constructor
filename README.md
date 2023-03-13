@@ -20,8 +20,8 @@ https://noi5enu1sanc3.github.io/calculator-constructor/
 ## TODO:
 
 - Mobile version
+- Adjust collision detection (as for now moving blocks feels not smooth enough, especially large ones)
 - Adding keyboard and touch sensors to drag-and-drop
-- Drop indicator when dragging/sorting blocks
 - Test and improve calculator functionality
 
 ## Run Locally
