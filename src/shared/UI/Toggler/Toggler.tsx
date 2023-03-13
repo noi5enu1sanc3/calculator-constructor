@@ -3,6 +3,7 @@ import { Segmented } from 'antd';
 
 import CodeSvg from '../SVGIcons/CodeSvg';
 
+import 'antd/lib/segmented/style/index';
 import styles from './Toggler.module.css';
 
 

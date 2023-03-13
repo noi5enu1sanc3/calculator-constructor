@@ -1,8 +1,6 @@
+@import '../../../assets/styles/variables.css';
+
 .container {
   grid-column: 2;
   justify-self: center;
-}
-
-.ant-segmented-item-icon {
-  color: var(--blue-primary) !important;
 }
