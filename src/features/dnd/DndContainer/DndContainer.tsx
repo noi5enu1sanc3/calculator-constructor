@@ -1,4 +1,4 @@
-import { DndContext, DragOverlay } from '@dnd-kit/core';
+import { DndContext, DragOverlay, closestCenter } from '@dnd-kit/core';
 import { createPortal } from 'react-dom';
 
 import ConstructorElement from '../../../shared/Blocks/ConstructorElement/ConstructorElement';
@@ -34,6 +34,7 @@ function DndContainer({ children }: Props) {
       onDragOver={handleDragOver}
       onDragCancel={handleDragCancel}
       sensors={sensors}
+      collisionDetection={closestCenter}
     >
       {children}
       {createPortal(
