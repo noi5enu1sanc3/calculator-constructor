@@ -10,6 +10,6 @@ export const LOCKED_BLOCKS = [BlockId.DISPLAY];
 export const DROPPABLE_CONTAINER_ID = 'CANVAS';
 
 export const SENSOR_OPTIONS = {
-  delay: 150,
+  delay: 100,
   tolerance: 5,
 };
